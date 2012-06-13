@@ -8,9 +8,9 @@ Chef Cookbooks in use at milaap.org. uses chef-solo
   apps and known ssh keys
   most of them will not be committed in this repo
 
-Uses bundler to lock the gem versions
+Uses bundler to lock the gem versions  
 It also uses rvm to specify the ruby version and to isolate gems in a
-rvm gemset
+rvm gemset  
 Some files are under gitignore as well, particularly the data_bags
 
 #### Directory Structure

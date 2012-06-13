@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -e
+
 cmd_options=$*
 # TODO: have an array and iterate over
 login="root@chef-client.milaap.org"

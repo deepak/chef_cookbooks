@@ -1,3 +1,10 @@
+# project specific
+data_bag/passwords/*
+RESOURCES
+TODO
+steps.sh
+
+# ruby files
 *.gem
 *.rbc
 .bundle
@@ -16,3 +23,23 @@ tmp
 .yardoc
 _yardoc
 doc/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+# ._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+auto-save-list
+tramp
+.\#*

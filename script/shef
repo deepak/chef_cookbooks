@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+config_file_path = File.expand_path("../../solo.rb", __FILE__)
+exec "shef --solo --config #{config_file_path}"
+

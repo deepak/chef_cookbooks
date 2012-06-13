@@ -1,3 +1,20 @@
-#!/usr/bin/env sh
+#!/usr/bin/env ruby
 
-bundle console
+# did not do, bundle console, as we set some Chef::Config as well
+
+require 'rubygems'
+require 'bundler'
+
+Bundler.require
+ARGV.clear
+
+require 'irb'
+require 'irb/completion'
+require 'irb/ext/save-history'
+
+# config for chef-solo
+Chef::Config[:solo] = true
+Chef::Config[:config_file] = File.expand_path("../../solo.rb", __FILE__)
+Chef::Config.from_file Chef::Config[:config_file]
+
+IRB.start

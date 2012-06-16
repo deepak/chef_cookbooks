@@ -5,4 +5,4 @@ set -e
 # TODO: hosts and authentication mechanish is hardcoded. 
 # should be able to pass multiple hosts and have ssl or user/password login
 
-knife bootstrap <foo>.<domain.com> -x root -P <initial-password> --sudo --template ./bootstrap/chef-solo-ubuntu12.04-gems-rackspace.erb
+knife bootstrap <sub-domain.domain.com> -x root -P <initial-password> --sudo --template ./bootstrap/chef-solo-ubuntu12.04-gems-rackspace.erb --version 0.10.10

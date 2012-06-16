@@ -2,7 +2,9 @@
 
 set -e
 
-# TODO: hosts and authentication mechanish is hardcoded. 
+# TODO: hosts, authentication mechanish and version is hardcoded.
+# maybe have an "environment" and the chef version is specified there 
 # should be able to pass multiple hosts and have ssl or user/password login
+# bootstrap using rbenv and does rbenv have gemsets ?
 
 knife bootstrap <sub-domain.domain.com> -x root -P <initial-password> --sudo --template ./bootstrap/chef-solo-ubuntu12.04-gems-rackspace.erb --version 0.10.10

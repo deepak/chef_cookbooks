@@ -1,5 +1,5 @@
 # project specific
-data_bag/passwords/*
+data_bags/*
 RESOURCES
 TODO
 steps.sh

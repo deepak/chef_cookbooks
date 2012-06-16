@@ -3,20 +3,24 @@ http://wiki.opscode.com/display/chef/Attributes
 
 The data_bags folder is of the form:  
 
+```text
 data_bag/
 └── passwords
     └── user.json
 └── <BAG-NAME>
     └── <ITEM-NAME>.json
+```
 
 #### Format
 
-{
-  "id": "user",
-  "root": {
-    "password_hashed": "change-the-password"
-  }
-}
+```javascript
+{  
+  "id": "item_name",  
+  "root": {  
+    "password_hashed": "change-the-password"  
+  }  
+}  
+```
 
 See http://tickets.opscode.com/browse/CHEF-3149  
 every DataBag needs an id which is the filename.  

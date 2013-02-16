@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+
+group :system_setup do
+  gem 'chef'
+  gem 'chefspec'
+  gem 'foodcritic'
+end
+

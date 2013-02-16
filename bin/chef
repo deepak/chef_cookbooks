@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# will run as root
+# --log_level debug
+
+if [ -s /etc/profile.d/rbenv.sh ]; then
+    source /etc/profile.d/rbenv.sh
+fi
+
+# can pass-in variables like
+# CHEF_DEPLOY_USER=deployer
+# and access it in ruby (role files etc)
+# like ENV['CHEF_DEPLOY_USER']
+
+# /etc/chef/solo.rb is the default but we are running it at /vagrant
+# TODO: temporary measure. not needed on production
+chef-solo --config `pwd -L | tr -d "\n"`/solo.rb -j dna.json

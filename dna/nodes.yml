@@ -1,0 +1,5 @@
+# the key is the FQDN of the server
+# and the value is the ip-address
+
+server1.acme.com:
+  ip_address: 0.0.0.1

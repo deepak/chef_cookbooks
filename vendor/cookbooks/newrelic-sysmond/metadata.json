@@ -1,0 +1,32 @@
+{
+  "name": "newrelic-sysmond",
+  "description": "Setup New Relic sysmond for server monitoring",
+  "long_description": "# chef-newrelic-sysmond\n\n## Description\n\nInstalls [newrelic-sysmond](https://newrelic.com/docs/server/new-relic-for-server-monitoring), New Relic for Server Monitoring.\n\n\n## Requirements\n\n### Supported Platforms\n\nThe following platforms are supported by this cookbook, meaning that the recipes run on these platforms without error:\n\n* Debian\n* Ubuntu\n\n## Recipes\n\n* `newrelic-sysmond` - The default recipe.\n\n## Usage\n\nThis cookbook installs the newrelic-sysmond components if not present, and pulls updates if they are installed on the system.\n\n## Attributes\n\n```ruby\ndefault[\"new_relic\"][\"keyserver\"]      = \"keys.gnupg.net\"\ndefault[\"new_relic\"][\"license_key\"]    = \"\"\ndefault[\"new_relic\"][\"loglevel\"]       = \"info\"\ndefault[\"new_relic\"][\"logfile\"]        = \"/var/log/newrelic/nrsysmond.log\"\ndefault[\"new_relic\"][\"proxy\"]          = \"\"\ndefault[\"new_relic\"][\"ssl\"]            = \"false\"\ndefault[\"new_relic\"][\"ssl_ca_bundle\"]  = \"\"\ndefault[\"new_relic\"][\"ssl_ca_path\"]    = \"\"\ndefault[\"new_relic\"][\"pidfile\"]        = \"\"\ndefault[\"new_relic\"][\"collector_host\"] = \"collector.newrelic.com\"\ndefault[\"new_relic\"][\"timeout\"]        = 30\n```\n\n\n## Basic Settings\n\nYou must set the value for `node[\"new_relic\"][\"license_key\"]`\n\n\n## Contributing\n\n1. Fork it\n2. Create your feature branch (`git checkout -b my-new-feature`)\n3. Commit your changes (`git commit -am 'Added some feature'`)\n4. Push to the branch (`git push origin my-new-feature`)\n5. Create new Pull Request\n\n\n## License\n\n**chef-newrelic-sysmond**\n\n* Freely distributable and licensed under the [MIT license](http://phlipper.mit-license.org/2011-2013/license.html).\n* Copyright (c) 2011-2013 Phil Cohen (github@phlippers.net) [![endorse](http://api.coderwall.com/phlipper/endorsecount.png)](http://coderwall.com/phlipper)\n* http://phlippers.net/\n",
+  "maintainer": "Phil Cohen",
+  "maintainer_email": "github@phlippers.net",
+  "license": "MIT",
+  "platforms": {
+    "debian": ">= 0.0.0",
+    "ubuntu": ">= 0.0.0"
+  },
+  "dependencies": {
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+    "newrelic-sysmond": "Install and configure newrelic-sysmond"
+  },
+  "version": "1.2.1"
+}

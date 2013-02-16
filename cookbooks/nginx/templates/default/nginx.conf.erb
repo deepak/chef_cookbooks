@@ -1,0 +1,160 @@
+# NOTE: [apt-get-conf] means the config created by the apt-get package
+
+# The only setting we feel strongly about is the fail_timeout=0
+# directive in the "upstream" block.  max_fails=0 also has the same
+# effect as fail_timeout=0 for current versions of nginx and may be
+# used in its place.
+
+# NOTE: 4 was [apt-get-conf]. unicorn default conf suggests 1 and gives the following advise
+# you generally only need one nginx worker unless you're serving
+# large amounts of static files which require blocking disk reads
+worker_processes <%= @node[:nginx][:worker_processes] %>;
+
+# # drop privileges, root is needed on most systems for binding to port 80
+# # (or anything < 1024).  Capability-based security may be available for
+# # your system and worth checking out so you won't need to be root to
+# # start nginx to bind on 80
+# user nobody nogroup; # for systems with a "nogroup"
+# user nobody nobody; # for systems with "nobody" as a group instead
+
+# TODO: hardcoded. should be in user cookbook
+# TODO: check comparative perms security wise
+# TODO: check perms of uploaded files in rails app
+user www-data;
+# user deployer;
+
+# Feel free to change all paths to suite your needs here, of course
+pid /var/run/nginx.pid;
+
+error_log /var/log/nginx/error.log;
+
+events {
+  # [apt-get-conf] recommends 768
+  worker_connections 1024; # increase if you have lots of clients
+  accept_mutex on; # "on" if nginx worker_processes > 1
+  use epoll; # enable for Linux 2.6+
+  # use kqueue; # enable for FreeBSD, OSX
+  # multi_accept on;
+}
+
+http {
+  ##
+  # Basic Settings
+  ##
+
+  # TODO: check with rackspace
+  # NOTE: vagrant has a bug with sendfile
+  # you generally want to serve static files with nginx since neither
+  # Unicorn nor Rainbows! is optimized for it at the moment
+  sendfile on;
+
+  # [apt-get-conf] has
+  # tcp_nopush on;
+  # tcp_nodelay on;
+  
+  tcp_nopush on; # off may be better for *some* Comet/long-poll stuff
+  tcp_nodelay off; # on may be better for some Comet/long-poll stuff
+
+  # set in the server block
+  # keepalive_timeout 2;
+
+  types_hash_max_size 2048;
+  # [apt-get-conf] default is on
+  # but off is better for security
+  server_tokens off;
+  
+  # server_names_hash_bucket_size 64;
+  # server_name_in_redirect off;
+  
+  include /etc/nginx/mime.types;
+  
+  # fallback in case we can't determine a type
+  default_type application/octet-stream;
+
+  ##
+  # Logging Settings
+  ##
+  
+  # click tracking!
+  access_log /var/log/nginx/access.log combined;
+  
+  # [apt-get-conf] puts it here but we put in the top most block
+  # error_log /var/log/nginx/error.log;
+
+  ##
+  # Gzip Settings
+  ##
+
+  # we haven't checked to see if Rack::Deflate on the app server is
+  # faster or not than doing compression via nginx.  It's easier
+  # to configure it all in one place here for static files and also
+  # to disable gzip for clients who don't get gzip/deflate right.
+  # There are other gzip settings that may be needed used to deal with
+  # bad clients out there, see http://wiki.nginx.org/NginxHttpGzipModule
+  gzip on;
+  gzip_http_version 1.0;
+  gzip_proxied any;
+  gzip_min_length 500;
+  gzip_disable "MSIE [1-6]\.";
+  gzip_types text/plain text/html text/xml text/css
+             text/comma-separated-values
+             text/javascript application/x-javascript
+             application/atom+xml;
+
+  # extra conf
+  gzip_comp_level 6;
+  
+  # [apt-get-conf]
+  # gzip on;
+  # gzip_disable "msie6";
+  ## gzip_vary on;
+  ## gzip_proxied any;
+  ## gzip_comp_level 6;
+  ## gzip_buffers 16 8k;
+  ## gzip_http_version 1.1;
+  ## gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+  
+  ##
+  # nginx-naxsi config
+  ##
+  # Uncomment it if you installed nginx-naxsi
+  ##
+  #include /etc/nginx/naxsi_core.rules;
+  
+  ##
+  # nginx-passenger config
+  ##
+  # Uncomment it if you installed nginx-passenger
+  ##
+  #passenger_root /usr;
+  #passenger_ruby /usr/bin/ruby;
+  
+  ##
+  # Virtual Host Configs
+  ##
+
+  include /etc/nginx/conf.d/*.conf;
+  include /etc/nginx/sites-enabled/*;
+}
+# http
+
+#mail {
+#	# See sample authentication script at:
+#	# http://wiki.nginx.org/ImapAuthenticateWithApachePhpScript
+# 
+#	# auth_http localhost/auth.php;
+#	# pop3_capabilities "TOP" "USER";
+#	# imap_capabilities "IMAP4rev1" "UIDPLUS";
+# 
+#	server {
+#		listen     localhost:110;
+#		protocol   pop3;
+#		proxy      on;
+#	}
+# 
+#	server {
+#		listen     localhost:143;
+#		protocol   imap;
+#		proxy      on;
+#	}
+#}

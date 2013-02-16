@@ -1,0 +1,23 @@
+[alias]
+	st = status
+        sts = status -sb
+	ci = commit
+	br = branch
+	co = checkout
+	df = diff
+	lg = log -p
+        lc = log --abbrev-commit --pretty=oneline 
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	log-summary = log --summary --stat
+        up = pull --rebase
+        rup-master = !"git fetch origin -v; git fetch upstream -v; git rebase upstream/master"
+        fetch-all = fetch --all --tags
+	f = fetch origin
+	p = push
+	r = rebase -p
+        sl = stash list
+        ss = stash save
+        sp = stash pop
+[color]
+	ui = auto

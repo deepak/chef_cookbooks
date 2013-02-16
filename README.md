@@ -1,4 +1,6 @@
-milaap_chef_cookbooks
+chef_cookbooks
 =====================
 
-Chef Cookbooks in use at milaap.org. uses chef-solo
+uses chef-solo
+
+

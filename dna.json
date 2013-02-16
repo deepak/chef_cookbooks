@@ -1,0 +1,3 @@
+{
+  "run_list": ["role[database]", "role[ruby_webapp]"]
+}
